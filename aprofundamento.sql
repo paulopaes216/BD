@@ -1,10 +1,7 @@
--- Criação do banco de dados (para MySQL)
 CREATE DATABASE IF NOT EXISTS clinica_odontologica;
 
--- Seleção do banco de dados
 USE clinica_odontologica;
 
--- Tabela de Pacientes
 CREATE TABLE IF NOT EXISTS Pacientes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -16,17 +13,15 @@ CREATE TABLE IF NOT EXISTS Pacientes (
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Tabela de Dentistas
 CREATE TABLE IF NOT EXISTS Dentistas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
-    cro VARCHAR(10) UNIQUE NOT NULL, -- CRO (Conselho Regional de Odontologia)
+    cro VARCHAR(10) UNIQUE NOT NULL,
     especialidade VARCHAR(50),
     telefone VARCHAR(20),
     email VARCHAR(100) UNIQUE
 );
 
--- Tabela de Consultas
 CREATE TABLE IF NOT EXISTS Consultas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     paciente_id INT,
@@ -39,7 +34,6 @@ CREATE TABLE IF NOT EXISTS Consultas (
     FOREIGN KEY (dentista_id) REFERENCES Dentistas(id) ON DELETE SET NULL
 );
 
--- Tabela de Tratamentos
 CREATE TABLE IF NOT EXISTS Tratamentos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
@@ -47,7 +41,6 @@ CREATE TABLE IF NOT EXISTS Tratamentos (
     preco DECIMAL(10, 2) NOT NULL
 );
 
--- Tabela de Consultas-Tratamentos (Relacionamento N:M)
 CREATE TABLE IF NOT EXISTS Consulta_Tratamento (
     consulta_id INT,
     tratamento_id INT,
