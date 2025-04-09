@@ -1,10 +1,6 @@
-CREATE DATABASE IF NOT EXISTS clinica_odontologica;
-
-USE clinica_odontologica;
-
 CREATE TABLE IF NOT EXISTS public."Pacientes"
 (
-    id integer NOT NULL,
+    id serial NOT NULL,
     nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
     cpf character varying(11) COLLATE pg_catalog."default" NOT NULL,
     data_nascimento date NOT NULL,
@@ -28,7 +24,7 @@ GRANT SELECT, INSERT ON TABLE public."Pacientes" TO "Recepcao";
 
 CREATE TABLE IF NOT EXISTS public."Dentistas"
 (
-    id integer NOT NULL DEFAULT nextval('"Dentistas_id_seq"'::regclass),
+    id serial NOT NULL,
     nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
     cro integer NOT NULL,
     especialidade character varying(50) COLLATE pg_catalog."default",
@@ -55,7 +51,7 @@ CREATE TYPE public.tipo_consulta AS ENUM
 
 CREATE TABLE IF NOT EXISTS public."Consultas"
 (
-    id integer NOT NULL DEFAULT nextval('"Consultas_id_seq"'::regclass),
+    id serial NOT NULL,
     paciente_id integer,
     dentista_id integer,
     data_consulta date,
@@ -70,10 +66,10 @@ CREATE TABLE IF NOT EXISTS public."Consultas"
         REFERENCES public."Pacientes" (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-)
+);
 CREATE TABLE IF NOT EXISTS public."Tratamentos"
 (
-    id integer NOT NULL DEFAULT nextval('"Tratamentos_id_seq"'::regclass),
+    id serial NOT NULL,
     nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
     descricao character(1) COLLATE pg_catalog."default",
     preco real,
