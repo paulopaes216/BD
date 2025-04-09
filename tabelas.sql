@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public."Pacientes"
     nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
     cpf character varying(11) COLLATE pg_catalog."default" NOT NULL,
     data_nascimento date NOT NULL,
-    telefone integer NOT NULL,
+    telefone character varying(20) NOT NULL,
     email character varying(100) COLLATE pg_catalog."default",
     data_cadastro timestamp with time zone,
     endereco character varying(150) COLLATE pg_catalog."default" NOT NULL,
