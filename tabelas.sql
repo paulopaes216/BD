@@ -55,8 +55,10 @@ CREATE TABLE IF NOT EXISTS public."Consultas"
     paciente_id integer,
     dentista_id integer,
     data_consulta date,
-    tipo_consulta character varying(20) COLLATE pg_catalog."default" NOT NULL,
-    status character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    tipo_consulta character varying(20) COLLATE pg_catalog."default",
+    status character varying(20) COLLATE pg_catalog."default",
+    CONSTRAINT check_tipo_consulta_check CHECK (tipo_consulta::text = ANY (ARRAY['Check-up'::character varying, 'Urgência'::character varying, 'Emergência'::character varying]::text[])),
+    CONSTRAINT check_status_check CHECK (status::text = ANY (ARRAY['Agendada'::character varying, 'Cancelada'::character varying, 'Realizada'::character varying]::text[])),
     CONSTRAINT "Consultas_pkey" PRIMARY KEY (id),
     CONSTRAINT dentista_id FOREIGN KEY (dentista_id)
         REFERENCES public."Dentistas" (id) MATCH SIMPLE
