@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel da Clínica</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="dashboard-layout">
+    
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <h2>Clínica Vida</h2>
+      <nav>
+        <ul>
+          <li><a href="#convenios">Convênios</a></li>
+          <li><a href="#exames">Exames</a></li>
+          <li><a href="#horarios">Horários</a></li>
+          <li><a href="#profissionais">Profissionais</a></li>
+          <li><a href="#contatos">Contatos</a></li>
+        </ul>
+      </nav>
+      <a href="index.html" class="btn logout-btn">Sair</a>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="dashboard-content">
+      <header>
+        <h1>Painel da Clínica</h1>
+        <p>Edite os dados da clínica e mantenha seu site atualizado</p>
+      </header>
+
+      <form id="formularioPainel">
+        <section class="card" id="convenios">
+          <h2>📋 Convênios Atendidos</h2>
+          <textarea id="conveniosInput" rows="4">Unimed
+Bradesco Saúde
+Amil</textarea>
+        </section>
+
+        <section class="card" id="exames">
+          <h2>🧪 Exames e Atendimentos</h2>
+          <textarea id="examesInput" rows="4">Exames laboratoriais
+Ultrassonografia
+Consultas com especialistas</textarea>
+        </section>
+
+        <section class="card" id="horarios">
+          <h2>📆 Horários Disponíveis</h2>
+          <textarea id="horariosInput" rows="4">Segunda-feira – 08h às 11h
+Terça-feira – 14h às 17h
+Quinta-feira – 08h às 17h</textarea>
+        </section>
+
+        <section class="card" id="profissionais">
+          <h2>👨‍⚕️ Profissionais</h2>
+          <textarea id="profissionaisInput" rows="4">Dra. Ana Beatriz – Clínica Geral
+Dr. João Carlos – Cardiologista</textarea>
+        </section>
+
+        <section class="card" id="contatos">
+          <h2>📞 Contato</h2>
+          <label>WhatsApp:</label>
+          <input type="text" id="whatsappInput" value="(11) 91234-5678">
+          <label>Telefone:</label>
+          <input type="text" id="telefoneInput" value="(11) 3344-5566">
+          <label>Email:</label>
+          <input type="text" id="emailInput" value="contato@clinicavida.com">
+        </section>
+
+        <div style="margin-top: 20px;">
+          <button type="button" onclick="salvarTudo()" class="btn salvar-btn">💾 Salvar Tudo</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script src="../js/clinica-dashboard.js"></script>
+</body>
+</html>

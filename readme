@@ -1,0 +1,17 @@
+/clinica-site
+│pasta html
+├── index.html               → Tela inicial (escolher clínica ou paciente)
+├── paciente.html            → Tela com infos para paciente
+├── login.html               → Login da clínica
+├── clinica-dashboard.html   → Área da clínica após login
+│
+├── css/
+│   └── style.css            → Estilo geral
+│
+├── js/
+│   ├── main.js              → Lógica da página inicial
+│   ├── paciente.js          → Scripts da tela do paciente
+│   ├── login.js             → Validação de login (simples)
+│   └── clinica.js           → Scripts do dashboard da clínica
+│
+└── assets/                  → Imagens, ícones etc.
