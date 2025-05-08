@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login da Clínica</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login da Clínica</h1>
+    <form id="loginForm">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="usuario" required>
+
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" required>
+
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+    <div id="mensagem" class="mensagem-erro"></div>
+
+    <a href="index.html" class="voltar-link">⬅ Voltar ao início</a>
+  </div>
+
+  <script src="../js/login.js"></script>
+</body>
+</html>

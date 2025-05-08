@@ -1,0 +1,253 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .botoes .btn {
+    display: inline-block;
+    margin: 15px;
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .botoes .btn:hover {
+    background-color: #2980b9;
+  }
+  
+
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f6fa;
+    color: #2c3e50;
+  }
+  
+  .paciente-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  header h1 {
+    font-size: 2.2rem;
+    color: #3498db;
+  }
+  
+  header p {
+    font-size: 1rem;
+    color: #7f8c8d;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  }
+  
+  .card h2 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .card ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .card ul li {
+    padding: 6px 0;
+    border-bottom: 1px solid #ecf0f1;
+  }
+  
+  .card ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .aviso {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #e67e22;
+    margin-bottom: 10px;
+  }
+  
+  .voltar {
+    text-align: center;
+    margin-top: 30px;
+  }
+  
+  .btn {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    margin: 100px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+  
+  .login-container h1 {
+    margin-bottom: 20px;
+    color: #3498db;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .mensagem-erro {
+    color: #e74c3c;
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .voltar-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  
+  .voltar-link:hover {
+    text-decoration: underline;
+  }
+  .dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background-color: #3498db;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .sidebar nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar nav ul li {
+    margin-bottom: 15px;
+  }
+  
+  .sidebar nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: opacity 0.3s;
+  }
+  
+  .sidebar nav ul li a:hover {
+    opacity: 0.8;
+  }
+  
+  .logout-btn {
+    margin-top: 30px;
+    background-color: #e74c3c;
+    text-align: center;
+  }
+  
+  .dashboard-content {
+    flex: 1;
+    padding: 40px 30px;
+    background-color: #f4f8fc;
+  }
+  
+  /* Reutilização dos estilos existentes */
+  .dashboard-content header {
+    margin-bottom: 30px;
+  }
+  
+  .painel-nota {
+    font-size: 0.9rem;
+    color: #e67e22;
+    margin-top: 8px;
+  }
+  
+  textarea,
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+  
+  .salvar-btn {
+    background-color: #2ecc71;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .salvar-btn:hover {
+    background-color: #27ae60;
+  }
+  
