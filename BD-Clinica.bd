@@ -1,0 +1,559 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.8
+-- Dumped by pg_dump version 16.8
+
+-- Started on 2025-05-14 23:35:02
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 863 (class 1247 OID 16476)
+-- Name: status_consulta; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.status_consulta AS ENUM (
+    'Agendada',
+    'Realizada',
+    'Cancelada'
+);
+
+
+ALTER TYPE public.status_consulta OWNER TO postgres;
+
+--
+-- TOC entry 860 (class 1247 OID 16469)
+-- Name: tipo_consulta; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.tipo_consulta AS ENUM (
+    'Check-up',
+    'Urgência',
+    'Tratamento'
+);
+
+
+ALTER TYPE public.tipo_consulta OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 222 (class 1259 OID 16493)
+-- Name: Consulta_Tratamento; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Consulta_Tratamento" (
+    consulta_id integer NOT NULL,
+    tratamento_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Consulta_Tratamento" OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16452)
+-- Name: Consultas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Consultas" (
+    id integer NOT NULL,
+    paciente_id integer,
+    dentista_id integer,
+    data_consulta date,
+    tipo_consulta character varying(20) NOT NULL,
+    status character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public."Consultas" OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16451)
+-- Name: Consultas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Consultas_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Consultas_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4842 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: Consultas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Consultas_id_seq" OWNED BY public."Consultas".id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16431)
+-- Name: Dentistas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Dentistas" (
+    id integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    cro integer NOT NULL,
+    especialidade character varying(50),
+    telefone character varying(20),
+    email character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public."Dentistas" OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16430)
+-- Name: Dentistas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Dentistas_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Dentistas_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4845 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: Dentistas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Dentistas_id_seq" OWNED BY public."Dentistas".id;
+
+
+--
+-- TOC entry 223 (class 1259 OID 16662)
+-- Name: Pacientes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Pacientes_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    MAXVALUE 2147483647
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Pacientes_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16404)
+-- Name: Pacientes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Pacientes" (
+    id integer DEFAULT nextval('public."Pacientes_id_seq"'::regclass) NOT NULL,
+    nome character varying(100) NOT NULL,
+    data_nascimento date NOT NULL,
+    email character varying(100),
+    data_cadastro timestamp with time zone,
+    endereco character varying(150) NOT NULL,
+    telefone character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public."Pacientes" OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16424)
+-- Name: Tratamentos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Tratamentos" (
+    id integer NOT NULL,
+    nome character varying(100) NOT NULL,
+    descricao character(1),
+    preco real
+);
+
+
+ALTER TABLE public."Tratamentos" OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16423)
+-- Name: Tratamentos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Tratamentos_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Tratamentos_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4850 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: Tratamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Tratamentos_id_seq" OWNED BY public."Tratamentos".id;
+
+
+--
+-- TOC entry 4666 (class 2604 OID 16455)
+-- Name: Consultas id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consultas" ALTER COLUMN id SET DEFAULT nextval('public."Consultas_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4665 (class 2604 OID 16434)
+-- Name: Dentistas id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Dentistas" ALTER COLUMN id SET DEFAULT nextval('public."Dentistas_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4664 (class 2604 OID 16427)
+-- Name: Tratamentos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Tratamentos" ALTER COLUMN id SET DEFAULT nextval('public."Tratamentos_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4831 (class 0 OID 16493)
+-- Dependencies: 222
+-- Data for Name: Consulta_Tratamento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Consulta_Tratamento" (consulta_id, tratamento_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4830 (class 0 OID 16452)
+-- Dependencies: 221
+-- Data for Name: Consultas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Consultas" (id, paciente_id, dentista_id, data_consulta, tipo_consulta, status) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4828 (class 0 OID 16431)
+-- Dependencies: 219
+-- Data for Name: Dentistas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Dentistas" (id, nome, cro, especialidade, telefone, email) FROM stdin;
+1	Pedro Vinicius	123456789	Cirurgião	(82)91234-5678	pedrovinicius123@gmail.com
+\.
+
+
+--
+-- TOC entry 4824 (class 0 OID 16404)
+-- Dependencies: 215
+-- Data for Name: Pacientes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Pacientes" (id, nome, data_nascimento, email, data_cadastro, endereco, telefone) FROM stdin;
+1	Junior	2004-12-01	juniorze12@gmail.com	2025-04-09 00:00:00-03	Av.Comendador Gustavo Paiva, 5017 - Cruz das Almas, Maceió - AL, 57038-000	(82)95555-5555
+2	Big	2004-12-30	pedrobigxd@gmail.com	2025-04-09 20:00:00-03	casa do big	(82)92323-2323
+\.
+
+
+--
+-- TOC entry 4826 (class 0 OID 16424)
+-- Dependencies: 217
+-- Data for Name: Tratamentos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Tratamentos" (id, nome, descricao, preco) FROM stdin;
+\.
+
+
+--
+-- TOC entry 4852 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: Consultas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Consultas_id_seq"', 1, false);
+
+
+--
+-- TOC entry 4853 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: Dentistas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Dentistas_id_seq"', 2, true);
+
+
+--
+-- TOC entry 4854 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: Pacientes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Pacientes_id_seq"', 2, true);
+
+
+--
+-- TOC entry 4855 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: Tratamentos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Tratamentos_id_seq"', 1, false);
+
+
+--
+-- TOC entry 4676 (class 2606 OID 16497)
+-- Name: Consulta_Tratamento Consulta_Tratamento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consulta_Tratamento"
+    ADD CONSTRAINT "Consulta_Tratamento_pkey" PRIMARY KEY (consulta_id, tratamento_id);
+
+
+--
+-- TOC entry 4674 (class 2606 OID 16457)
+-- Name: Consultas Consultas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consultas"
+    ADD CONSTRAINT "Consultas_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4672 (class 2606 OID 16436)
+-- Name: Dentistas id_dentista; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Dentistas"
+    ADD CONSTRAINT id_dentista PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4668 (class 2606 OID 16408)
+-- Name: Pacientes id_paciente; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Pacientes"
+    ADD CONSTRAINT id_paciente PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4670 (class 2606 OID 16429)
+-- Name: Tratamentos id_tratamento; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Tratamentos"
+    ADD CONSTRAINT id_tratamento PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4679 (class 2606 OID 16503)
+-- Name: Consulta_Tratamento Consulta_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consulta_Tratamento"
+    ADD CONSTRAINT "Consulta_id" FOREIGN KEY (consulta_id) REFERENCES public."Consultas"(id);
+
+
+--
+-- TOC entry 4680 (class 2606 OID 16498)
+-- Name: Consulta_Tratamento Tratamento_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consulta_Tratamento"
+    ADD CONSTRAINT "Tratamento_id" FOREIGN KEY (tratamento_id) REFERENCES public."Tratamentos"(id);
+
+
+--
+-- TOC entry 4677 (class 2606 OID 16463)
+-- Name: Consultas dentista_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consultas"
+    ADD CONSTRAINT dentista_id FOREIGN KEY (dentista_id) REFERENCES public."Dentistas"(id);
+
+
+--
+-- TOC entry 4678 (class 2606 OID 16458)
+-- Name: Consultas paciente_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consultas"
+    ADD CONSTRAINT paciente_id FOREIGN KEY (paciente_id) REFERENCES public."Pacientes"(id);
+
+
+--
+-- TOC entry 4838 (class 0 OID 0)
+-- Dependencies: 863
+-- Name: TYPE status_consulta; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TYPE public.status_consulta TO "Administrador";
+
+
+--
+-- TOC entry 4839 (class 0 OID 0)
+-- Dependencies: 860
+-- Name: TYPE tipo_consulta; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON TYPE public.tipo_consulta TO "Administrador";
+
+
+--
+-- TOC entry 4840 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: TABLE "Consulta_Tratamento"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT ON TABLE public."Consulta_Tratamento" TO "Recepcao";
+GRANT ALL ON TABLE public."Consulta_Tratamento" TO "Administrador";
+
+
+--
+-- TOC entry 4841 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: TABLE "Consultas"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT ON TABLE public."Consultas" TO "Recepcao";
+GRANT ALL ON TABLE public."Consultas" TO "Administrador";
+
+
+--
+-- TOC entry 4843 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: SEQUENCE "Consultas_id_seq"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public."Consultas_id_seq" TO "Administrador";
+
+
+--
+-- TOC entry 4844 (class 0 OID 0)
+-- Dependencies: 219
+-- Name: TABLE "Dentistas"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT ON TABLE public."Dentistas" TO "Recepcao";
+GRANT ALL ON TABLE public."Dentistas" TO "Administrador";
+
+
+--
+-- TOC entry 4846 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: SEQUENCE "Dentistas_id_seq"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public."Dentistas_id_seq" TO "Administrador";
+
+
+--
+-- TOC entry 4847 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: SEQUENCE "Pacientes_id_seq"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public."Pacientes_id_seq" TO "Administrador";
+
+
+--
+-- TOC entry 4848 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: TABLE "Pacientes"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT ON TABLE public."Pacientes" TO "Recepcao";
+GRANT ALL ON TABLE public."Pacientes" TO "Administrador";
+
+
+--
+-- TOC entry 4849 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: TABLE "Tratamentos"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT SELECT,INSERT ON TABLE public."Tratamentos" TO "Recepcao";
+GRANT ALL ON TABLE public."Tratamentos" TO "Administrador";
+
+
+--
+-- TOC entry 4851 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: SEQUENCE "Tratamentos_id_seq"; Type: ACL; Schema: public; Owner: postgres
+--
+
+GRANT ALL ON SEQUENCE public."Tratamentos_id_seq" TO "Administrador";
+
+
+--
+-- TOC entry 2065 (class 826 OID 16402)
+-- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: -; Owner: postgres
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON SEQUENCES TO "Administrador";
+
+
+--
+-- TOC entry 2066 (class 826 OID 16403)
+-- Name: DEFAULT PRIVILEGES FOR TYPES; Type: DEFAULT ACL; Schema: -; Owner: postgres
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TYPES TO "Administrador";
+
+
+--
+-- TOC entry 2063 (class 826 OID 16400)
+-- Name: DEFAULT PRIVILEGES FOR FUNCTIONS; Type: DEFAULT ACL; Schema: -; Owner: postgres
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON FUNCTIONS TO "Administrador";
+
+
+--
+-- TOC entry 2064 (class 826 OID 16401)
+-- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: -; Owner: postgres
+--
+
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT SELECT,INSERT ON TABLES TO "Recepcao";
+ALTER DEFAULT PRIVILEGES FOR ROLE postgres GRANT ALL ON TABLES TO "Administrador";
+
+
+-- Completed on 2025-05-14 23:35:02
+
+--
+-- PostgreSQL database dump complete
+--
+
